@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    let hasTyped = false
-    let lastTime = 0
+    let hasTyped = false;
+    let lastTime = 0;
     const inputField = document.getElementById("find");
 
     document.getElementById("forward").innerHTML = ">";
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     inputField.addEventListener('input', function (event) {
         const now = new Date();
         hasTyped = true;
-        lastTime = now.getSeconds()
+        lastTime = now.getSeconds();
     });
 
     window.addEventListener("unload", function() {
