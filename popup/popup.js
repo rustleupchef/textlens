@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     let hasTyped = false
     let lastTime = 0
-    const inputField = document.getElementById("test");
+    const inputField = document.getElementById("finds");
 
     document.getElementById("forward").innerHTML = ">";
     document.getElementById("backward").innerHTML = "<";
