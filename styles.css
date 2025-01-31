@@ -1,6 +1,6 @@
 .textlens-highlight-unselected { 
     filter: blur(5px);
-    filter: brightness(0.4);
+    filter: brightness(1.2);
     filter: contrast(200%);
     filter: drop-shadow(16px 16px 20px blue);
     filter: grayscale(50%);
@@ -13,7 +13,7 @@
 
 .textlens-highlight-selected { 
     filter: blur(5px);
-    filter: brightness(0.4);
+    filter: brightness(1.2);
     filter: contrast(200%);
     filter: drop-shadow(16px 16px 20px blue);
     filter: grayscale(50%);
