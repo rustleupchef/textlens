@@ -13,6 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
         hasTyped = true;
         lastTime = now.getSeconds()
     });
+
+    window.addEventListener("unload", function() {
+        browser.runtime.sendMessage({type: "CLOSE"});
+    });
     
     
     
