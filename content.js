@@ -1,5 +1,6 @@
 let index = 0;
 let imagesList = new Array();
+const Tesseract = require('tesseract.js');
 
 browser.runtime.onMessage.addListener((message) => {
     if (message.type === "FROM_POPUP") {
@@ -17,7 +18,6 @@ browser.runtime.onMessage.addListener((message) => {
         if (message.data === "FORWARDS") {
             if (imagesList.length > 0) {
                 index = (index + 1) % imagesList.length;
-                console.log();
             }
         }
 
@@ -35,8 +35,6 @@ browser.runtime.onMessage.addListener((message) => {
 });
 
 function grabImgs(name) {
-    console.log(index);
-    console.log(imagesList);
     index = 0
     imagesList.forEach(image => {
         if (image !== null) {
@@ -48,15 +46,33 @@ function grabImgs(name) {
     imgs = document.querySelectorAll('img');
     const images = Array.from(imgs);
     images.forEach(image => {
+        
+
         if (image.hasAttribute('src') && image.src.includes(name)) {
             image.classList.add("textlens-highlight-unselected");
             imagesList.push(image);
+            return;
         }
 
         if (image.hasAttribute('alt') && image.alt.includes(name)) {
             image.classList.add("textlens-highlight-unselected");
             imagesList.push(image);
+            return;
         }
+
+        
+        const boundingRect = image.getBoundingClientRect();
+        if (boundingRect.width * boundingRect.height < 1000) return;
+
+        Tesseract.recognize(
+            image.src,
+            'eng',
+        ).then(({ data: { text } }) => {
+            if (text.includes(name)) {
+                image.classList.add("textlens-highlight-unselected");
+                imagesList.push(image);
+            }
+        });
     });
     if (imagesList.length > 0) {
         imagesList[index].classList.add('textlens-highlight-selected');
